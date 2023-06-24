@@ -1,0 +1,248 @@
+$red:rgb(164, 15, 15);
+
+.board-wrap {
+  > div {
+    cursor: pointer !important;
+    color: white;
+    > div:hover {
+      background-color: orange;
+    }
+  }
+}
+.black{
+  background-color: black;
+}
+.red{
+  background-color: $red !important;
+}
+
+svg {
+  color: white;
+}
+
+.board-wrap {
+  grid-area: board;
+  margin: 1.5vh auto;
+  display: grid;
+  grid-template-areas: "board1";
+}
+
+.board {
+  width: 97vw;
+  max-width: 750px;
+  height: calc(97vw * (5 / 14));
+  max-height: calc(750px * (5 / 14));
+  display: grid;
+  grid-area: board1;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-areas:
+    "n0 n3 n6 n9 n12 n15 n18 n21 n24 n27 n30 n33 n36 x3"
+    "n0 n2 n5 n8 n11 n14 n17 n20 n23 n26 n29 n32 n35 x2"
+    "n0 n1 n4 n7 n10 n13 n16 n19 n22 n25 n28 n31 n34 x1"
+    ".  z1 z1 z1  z1  z2  z2  z2  z2  z3  z3  z3  z3 ."
+    ".   s  s  e   e   r   r   b   b   o   o   g   g .";
+}
+
+.streets {
+  display: grid;
+  grid-area: board1;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-areas: ". st0 st1 st2 st3 st4 st5 st6 st7 st8 st9 st10 st11 .";
+}
+
+.streets > div {
+  height: calc(100% / 5 / 4);
+  position: relative;
+  top: calc(100% / 5 * 3 - 100% / 5 / 4 / 2);
+  z-index: 110;
+}
+
+.streets > div:hover {
+  background-color: orange;
+}
+
+.verts {
+  display: grid;
+  grid-area: board1;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: calc(100% / 5) calc(100% / 5) calc(100% / 5);
+  grid-template-areas:
+    ". . . . . . . . . . . . . ."
+    ". ve0 ve1 ve2 ve3 ve4 ve5 ve6 ve7 ve8 ve9 ve10 ve11 ."
+    ". ve12 ve13 ve14 ve15 ve16 ve17 ve18 ve19 ve20 ve21 ve22 ve23 .";
+  align-items: start;
+  justify-items: center;
+}
+
+.verts > div {
+  position: relative;
+  width: calc(100% / 4);
+  height: calc(100% / 4);
+  top: calc(-100% / 4 / 2);
+  z-index: 120;
+}
+
+.verts > div:hover {
+  background-color: orange;
+}
+
+.horiz {
+  display: grid;
+  grid-area: board1;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: calc(100% / 5) calc(100% / 5) calc(100% / 5);
+  grid-template-areas:
+    ". ho0 ho1 ho2 ho3 ho4 ho5 ho6 ho7 ho8 ho9 ho10 ho11 ."
+    ". ho12 ho13 ho14 ho15 ho16 ho17 ho18 ho19 ho20 ho21 ho22 ho23 ."
+    ". ho24 ho25 ho26 ho27 ho28 ho29 ho30 ho31 ho32 ho33 ho34 ho35 .";
+  align-items: center;
+  justify-items: start;
+}
+
+.horiz > div {
+  position: relative;
+  width: calc(100% / 4);
+  height: calc(100% / 4);
+  left: calc(-100% / 4 / 2);
+  z-index: 130;
+}
+
+.horiz > div:hover {
+  background-color: orange;
+}
+
+.squares {
+  display: grid;
+  grid-area: board1;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: calc(100% / 5) calc(100% / 5) calc(100% / 5);
+  grid-template-areas:
+    ". . . . . . . . . . . . . ."
+    ". sq0 sq1 sq2 sq3 sq4 sq5 sq6 sq7 sq8 sq9 sq10 sq11 ."
+    ". sq12 sq13 sq14 sq15 sq16 sq17 sq18 sq19 sq20 sq21 sq22 sq23 .";
+  align-items: start;
+  justify-items: start;
+}
+
+.squares > div {
+  position: relative;
+  width: calc(100% / 4);
+  height: calc(100% / 4);
+  left: calc(-100% / 4 / 2);
+  top: calc(-100% / 4 / 2);
+  z-index: 150;
+}
+
+.squares > div:hover {
+  background-color: orange;
+}
+
+.board > div {
+  display: grid;
+  position: relative;
+  place-items: center;
+  text-transform: uppercase;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  z-index: 100;
+}
+
+.board .red {
+  background-color: $red;
+}
+
+.board .black {
+  background-color: #2b2627;
+}
+
+.board > #s,
+.board > #e,
+.board > #r,
+.board > #b,
+.board > #o,
+.board > #x1,
+.board > #n0,
+.board > #g {
+  border-bottom: 1px solid white;
+}
+
+.board > #n0,
+.board > #s,
+.board > #z1 {
+  border-left: 1px solid white;
+}
+
+.board #r svg,
+.board #b svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.board #r polygon {
+  fill: $red;
+  stroke: white;
+}
+
+.board #b polygon {
+  fill: #2b2627;
+  stroke: white;
+}
+
+.board-wrap .placed-chips {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  grid-template-areas: "chip";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#n1,
+#n4,
+#n7,
+#n10,
+#n13,
+#n16,
+#n19,
+#n22,
+#n25,
+#n28,
+#n31,
+#n34 {
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+#n34 {
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.2), 3px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+#n35,
+#n36 {
+  box-shadow: 3px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.placed-chips .chip {
+  position: relative;
+  grid-area: chip;
+  width: 5.5vw;
+  max-width: 30px;
+  height: 5.5vw;
+  max-height: 30px;
+}
+
+.streets .placed-chips .chip {
+  margin-top: -18%;
+}
+
+.verts .placed-chips .chip svg,
+.horiz .placed-chips .chip svg,
+.squares .placed-chips .chip svg {
+  position: relative;
+  top: -38%;
+  left: -38%;
+}
