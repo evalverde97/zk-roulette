@@ -1,15 +1,26 @@
-
 .app{
+    background-color: #16a34a;
+}
+.game{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     align-items: center;
-    background-color: #16a34a;
     transition: left 0.2s;
 }
-// TODO - revisar que estilos corresponden a otros componentes y migrarlos
+
+.game-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100vw;
+}
+
 .app.active-menu {
   left: -320px;
 }

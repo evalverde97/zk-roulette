@@ -7,6 +7,8 @@ import Wheel from "./components/Wheel";
 
 import "./App.scss";
 import Board from "./components/Board";
+import BetSelector from "./components/BetSelector";
+import Info from "./components/Info/Info";
 
 export const TOGGLE_MENU = "TOGGLE_MENU";
 export const OPEN_MENU = "OPEN_MENU";
@@ -61,8 +63,14 @@ function App() {
     <AppContext.Provider value={{ ...state, ...profile }} >
       
       <div className="app">
-        <Wheel />
-        <Board />
+        <div className="game">
+          <Wheel />
+          <Board />
+        </div>
+        <div className="game-info">
+          <Info />
+          <BetSelector />
+        </div>
       </div>
     </AppContext.Provider>
   );
