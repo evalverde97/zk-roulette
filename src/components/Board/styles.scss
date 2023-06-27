@@ -21,10 +21,14 @@ svg {
 }
 
 .board-wrap {
-  grid-area: board;
-  margin: 1.5vh auto;
-  display: grid;
-  grid-template-areas: "board1";
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    section{
+      margin-top: 10px;
+    }
 }
 
 .board {
@@ -245,4 +249,42 @@ svg {
   position: relative;
   top: -38%;
   left: -38%;
+}
+
+// INFO STYLES
+.info {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-top: -30px;
+  width: 100%;
+}
+
+.info > div {
+  min-width: 75px;
+  padding-left: 20px;
+}
+
+.info .bet {
+  justify-self: end;
+  padding-right: 20px;
+}
+
+.info p {
+  line-height: 26px;
+}
+
+.info .padded {
+  opacity: 0.12;
+}
+.info-element{
+    justify-self: end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0px 10px;
 }

@@ -9,7 +9,6 @@ const profile = {
   betsHistory: [],
   spinDeg: 0,
   ballSpinDeg: 0,
-  background: "green",
 };
 
 export default profile;

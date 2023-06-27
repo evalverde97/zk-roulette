@@ -1,24 +1,34 @@
+$green: #055a24;
+
 .app{
-    background-color: #16a34a;
+  background-color: $green;
+  height: 100vh;
+  font-family: 'Cinzel', serif;
 }
-.game{
+
+.centered{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-around;
     align-content: center;
-    justify-content: center;
     align-items: center;
+}
+
+.game{
     transition: left 0.2s;
+    height: 100vh;
 }
 
 .game-info{
+    color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     flex-wrap: nowrap;
     align-items: center;
-    width: 100vw;
+    background: linear-gradient(to bottom, #020540eb, #000104);
+
 }
 
 .app.active-menu {
@@ -293,32 +303,6 @@ button[disabled],
   z-index: 30;
 }
 
-.info {
-  grid-area: info;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  margin-top: -30px;
-}
-
-.info > div {
-  min-width: 75px;
-  padding-left: 20px;
-}
-
-.info .bet {
-  justify-self: end;
-  padding-right: 20px;
-}
-
-.info p {
-  line-height: 26px;
-}
-
-.info .padded {
-  opacity: 0.12;
-}
-
 .bet-select {
   grid-area: chips;
   margin: 9px;
@@ -495,10 +479,6 @@ button.spin text {
 
   .info {
     margin-top: 0;
-  }
-
-  .board-wrap {
-    font-size: 1.9vw;
   }
 
   .wheel {

@@ -3,6 +3,9 @@ import "./styles.scss";
 import { MAX_BET, black, sumBet } from "../../lib/defs";
 import { AppContext } from "../../App";
 import Chip from "../Chip/Chip";
+import Actions from "../Actions/Actions";
+import Info from '../Info/Info'
+import BetSelector from "../BetSelector";
 
 const DISPLAY_VALUES = {
   z1: "1ST 12",
@@ -112,6 +115,7 @@ function Board() {
 
   return (
     <div className="board-wrap">
+      <Info />
       <div className="board">
         {Array.from({ length: 37 }, (v, i) => i).map(n => 
           cell(`n${n}`, black(n) ? "black" : (n !== 0) ? "red" : "green")
@@ -141,6 +145,12 @@ function Board() {
       <div className="squares">
         {Array.from({ length: 24 }, (v, i) => i).map(n => bet(`sq${n}`))}
       </div>
+      <section>
+        <BetSelector />
+      </section>
+      <section>
+        <Actions />
+      </section>
     </div>
   );
 }

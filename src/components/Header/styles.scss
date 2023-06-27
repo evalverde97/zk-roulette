@@ -1,0 +1,31 @@
+.header{
+  color:white;
+  z-index: 1;
+  background-color: rgb(10, 9, 9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+}
+.logo{
+  font-family: 'Cinzel', serif;
+  margin-left: 80px;
+}
+
+.user-options{
+  display: flex;
+  height: 60px;
+  justify-content: flex-end;
+  align-items: center;
+  button{
+    margin: 0px 10px;
+    margin-right: 25px;
+  }
+  div{
+    margin: 0px 10px;
+    margin-right: 25px;
+  }
+}
+

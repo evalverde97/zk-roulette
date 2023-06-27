@@ -7,8 +7,7 @@ import Wheel from "./components/Wheel";
 
 import "./App.scss";
 import Board from "./components/Board";
-import BetSelector from "./components/BetSelector";
-import Info from "./components/Info/Info";
+import Header from "./components/Header/Header";
 
 export const TOGGLE_MENU = "TOGGLE_MENU";
 export const OPEN_MENU = "OPEN_MENU";
@@ -21,7 +20,7 @@ export const initialState = {
   betsHistory: [],
   spinDeg: 0,
   ballSpinDeg: 0,
-  background: "green",
+  profile: profile,
 };
 
 let savedState;
@@ -60,16 +59,12 @@ function App() {
   }, [profileId]);
 
   return (
-    <AppContext.Provider value={{ ...state, ...profile }} >
-      
+    <AppContext.Provider value={{ ...state }} >
+      <Header profile={profile}/>
       <div className="app">
-        <div className="game">
+        <div className="game centered">
           <Wheel />
           <Board />
-        </div>
-        <div className="game-info">
-          <Info />
-          <BetSelector />
         </div>
       </div>
     </AppContext.Provider>

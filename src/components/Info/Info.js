@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../App";
 import { sumBet } from "../../lib/defs";
 
@@ -21,45 +21,20 @@ const PaddedNumber = ({ value }) => {
 };
 
 function Info() {
-  const { balance, currentBet, spinning } = useContext(AppContext);
-  const [storedBalance, storeBalance] = useState(0);
-  const [storedBet, storeBet] = useState(0);
+  const { balance, currentBet } = useContext(AppContext);
 
-  //FIXME - resolver como puedo reemplazar esta funcion sin necesidad de agregar una nueva dependencia
-  // const { countUp: countUpBalance, update: updateBalance } = useCountUp({
-  //   end: storedBalance,
-  //   duration: 0.5
-  //   // useEasing: false
-  // });
-
-  // const { countUp: countUpBet, update: updateBet } = useCountUp({
-  //   end: storedBet,
-  //   duration: 0.5
-  //   // useEasing: false
-  // });
 
   const currentBetSum = sumBet(currentBet);
-  const [bet, updateBet] = useState(currentBetSum);
-  const [currentBalance, updateCurrentBalance] = useState(balance);
-
-  if (storedBet !== currentBetSum) {
-    updateBet(currentBetSum);
-    storeBet(currentBetSum);
-  }
-  if (!spinning && storedBalance !== balance) {
-    updateCurrentBalance(balance);
-    storeBalance(balance);
-  }
 
   return (
     <div className="info">
-      <div className="balance">
+      <div className="info-element">
         <h5>Balance</h5>
-        <PaddedNumber value={currentBalance} />
+        <PaddedNumber value={balance} />
       </div>
-      <div className="bet">
+      <div className="info-element">
         <h5>Bet</h5>
-        <PaddedNumber value={bet} />
+        <PaddedNumber value={currentBetSum} />
       </div>
     </div>
   );
