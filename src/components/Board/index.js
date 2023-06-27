@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
-import "./styles.scss";
-import { MAX_BET, black, sumBet } from "../../lib/defs";
 import { AppContext } from "../../App";
-import Chip from "../Chip/Chip";
+import { MAX_BET, black, sumBet } from "../../lib/defs";
+import { addHandler } from "../../utils/reducer";
 import Actions from "../Actions/Actions";
-import Info from '../Info/Info'
 import BetSelector from "../BetSelector";
+import Chip from "../Chip/Chip";
+import Info from '../Info/Info';
+import "./styles.scss";
 
 const DISPLAY_VALUES = {
   z1: "1ST 12",
@@ -20,6 +21,12 @@ const DISPLAY_VALUES = {
   x3: "2:1"
 };
 
+export const PLACE_BET = "PLACE_BET";
+export const CLEAR_BOARD = "CLEAR_BOARD";
+export const DOUBLE_BET = "DOUBLE_BET";
+export const QUADRUPLE_BET = "QUADRUPLE_BET";
+export const UNDO_BET = "UNDO_BET";
+
 function addHistory(history, bet) {
   history.push(JSON.stringify(bet));
   if (history.length > 25) {
@@ -27,6 +34,59 @@ function addHistory(history, bet) {
   }
 }
 
+addHandler(PLACE_BET, (action, { betsHistory = [], currentBet = {} }) => {
+  addHistory(betsHistory, currentBet);
+  const bets = currentBet[action.pos] || [];
+  bets.push(action.amount);
+  return {
+    currentBet: { ...currentBet, [action.pos]: [...bets] },
+    betsHistory
+  };
+});
+
+addHandler(UNDO_BET, (action, { currentBet = {}, betsHistory = [] }) => {
+  let prevBet = betsHistory.pop() || "{}";
+  return {
+    currentBet: JSON.parse(prevBet),
+    betsHistory
+  };
+});
+
+addHandler(CLEAR_BOARD, (action, { betsHistory = [], currentBet = {} }) => {
+  addHistory(betsHistory, currentBet);
+  return {
+    currentBet: {}
+  };
+});
+
+addHandler(DOUBLE_BET, (action, { betsHistory = [], currentBet = {} }) => {
+  const double = {};
+  addHistory(betsHistory, currentBet);
+
+  for (const key in currentBet) {
+    double[key] = [...currentBet[key], ...currentBet[key]];
+  }
+  return {
+    currentBet: double
+  };
+});
+
+addHandler(QUADRUPLE_BET, (action, { betsHistory = [], currentBet = {} }) => {
+  const quad = {};
+  addHistory(betsHistory, currentBet);
+
+  for (const key in currentBet) {
+    quad[key] = [
+      ...currentBet[key],
+      ...currentBet[key],
+      ...currentBet[key],
+      ...currentBet[key]
+    ];
+  }
+  return {
+    currentBet: quad
+  };
+});
 
 const translate = key => {
   let value = DISPLAY_VALUES[key];
@@ -71,18 +131,17 @@ const PlacedChips = ({ values }) => {
 };
 
 function Board() {
-  const [ setCurrentBet] = useState({});
-  const [message, setMessage] = useState("");
-  const { activeBet, currentBet } = useContext(AppContext);
-
+  const { activeBet, currentBet, dispatch } = useContext(AppContext);
 
   const placeBet = id => {
-    if (sumBet(currentBet) >= MAX_BET){
-      setMessage("TABLE_LIMIT REACHED");
-    } 
-    else {
-      setCurrentBet({ pos: id, amount: activeBet})
-    };
+    if (sumBet(currentBet) >= MAX_BET) {
+      console.log('table limit reached');
+    } else
+      dispatch({
+        type: PLACE_BET,
+        pos: id,
+        amount: activeBet
+      });
   };
 
   const bet = id => (
@@ -112,7 +171,7 @@ function Board() {
       {currentBet[n] ? <PlacedChips values={currentBet[n]} /> : null}
     </div>
   );
-
+// NO TOCAR NADA DE AQUI PARA ABAJO
   return (
     <div className="board-wrap">
       <Info />

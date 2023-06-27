@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 
-import "./styles.scss";
-import { AppContext } from "../../App";
+import { AppContext, TEXT } from "../../App";
 import { WHEEL_NUMBERS, black } from "../../lib/defs";
+import { addHandler } from '../../utils/reducer';
+import "./styles.scss";
 
 export const DEGREES_PER_SPIN = 3 * 383;
 export const SPIN_DURAION_IN_SECONDS = 10;
@@ -10,6 +11,35 @@ export const SPIN_DURAION_IN_SECONDS = 10;
 export const BEGIN_SPIN = "BEGIN_SPIN";
 export const BEGIN_BALL_SPIN = "BEGIN_BALL_SPIN";
 export const END_SPIN = "END_SPIN";
+
+addHandler(BEGIN_SPIN, (action, { spinDeg }) => {
+  spinDeg += DEGREES_PER_SPIN;
+  return {
+    spinDeg,
+    spinning: true
+  };
+});
+
+addHandler(BEGIN_BALL_SPIN, (action, { ballSpinDeg }) => {
+  ballSpinDeg =
+    ballSpinDeg -
+    (ballSpinDeg % 360) +
+    WHEEL_NUMBERS.indexOf(action.luckyNumber) * 9.73 -
+    360 * 8;
+
+  return {
+    message: "",
+    messageType: TEXT,
+    ballSpinDeg
+  };
+});
+
+addHandler(END_SPIN, ({ luckyNumber }) => {
+  return {
+    luckyNumber,
+    spinning: false
+  };
+});
 
 
 function Wheel() {

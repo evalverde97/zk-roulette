@@ -32,9 +32,9 @@ const Header = ({profile}) => {
         <div className='user-options'>
           <Avatar alt="Z" src="/profile.jpg" onClick={handleMenuOpen} />
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
-            <MenuItem onClick={handleMenuClose}>Option 1</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Option 2</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Option 3</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Depositar</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Preferencias</MenuItem>
           </Menu>
         </div>
       }
