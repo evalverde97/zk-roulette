@@ -279,6 +279,10 @@ svg {
   opacity: 0.12;
 }
 .info-element{
+  :hover{
+    cursor: pointer;
+    background-color: inherit !important;
+  }
     justify-self: end;
     display: flex;
     flex-direction: row;

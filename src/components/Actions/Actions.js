@@ -465,7 +465,6 @@ function Actions() {
     id,
     spinning,
     activeMenu,
-    readedWelcome,
   } = useContext(AppContext);
 
   const clearDisabled = spinning || sumBet(currentBet) === 0 || activeMenu;
